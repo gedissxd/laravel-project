@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  <g stroke-width="0.5" stroke="hsla(0, 0%, 0%, 1.00)" fill="none">
+    <pattern id="gridPattern" width="66.66666666666667" height="66.66666666666667" patternUnits="userSpaceOnUse">
+      <rect width="66.66666666666667" height="66.66666666666667" />
+    </pattern>
+    <rect width="800" height="800" fill="url(#gridPattern)" />
+  </g>
+</svg>
