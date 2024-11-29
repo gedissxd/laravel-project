@@ -20,9 +20,7 @@
            <x-errors name="image"/>
             <div>
                 <x-label for="price">Price</x-label>
-                <div>
                     <x-input type="number" id="price" name="price" required/>
-                </div>
             </div>
             <x-errors name="price"/>
             <div>
