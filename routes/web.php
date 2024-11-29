@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 Route::view('/', 'home');
 Route::resource('products', ProductController::class);
 Route::view('/cart', 'cart');
+Route::view('/login' ,'login');
 
 
 // //all products

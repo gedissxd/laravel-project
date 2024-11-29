@@ -9,13 +9,23 @@
 </head>
 <body class="flex flex-col min-h-screen ">
 
-    <div class="flex justify-center sticky top-0 z-50">
-        <nav class=" bg-sky-500/90 w-full h-[50px] flex justify-center items-center border-b-1 shadow-sm shadow-white/50 border-white-500 backdrop-blur-sm">
-            <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
-            <x-nav-link href="/products" :active="request()->is('products')">Products</x-nav-link>
-            <x-nav-link href="/cart" :active="request()->is('cart')">Cart</x-nav-link>
-        </nav>
-    </div>      
+<div class="sticky top-0 z-50">
+    <nav class="font-bold text-white bg-sky-500/90 w-full h-[50px] border-b shadow-md shadow-white/50 backdrop-blur-sm">
+        <div class="mx-auto flex items-center justify-between h-full px-4">
+            <div class="flex-1"></div>
+            <div class="flex space-x-6">
+                <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
+                <x-nav-link href="/products" :active="request()->is('products')">Products</x-nav-link>
+                <x-nav-link href="/cart" :active="request()->is('cart')">Cart</x-nav-link>
+            </div>
+            <div class="flex-1 flex justify-end">
+                <x-nav-link href="/login" :active="request()->is('login')">Login</x-nav-link>
+            </div>
+        </div>
+    </nav>
+</div>
+
+
     <div class="flex justify-center w-full">
         {{ $slot }}
     </div>
