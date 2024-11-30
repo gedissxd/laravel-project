@@ -39,9 +39,9 @@
                 </div>
             </div>
             <div class="mt-6">
-                <x-button class="px-4 py-2">
+                <button class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-xs text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 ">
                     Proceed to Checkout
-                </x-button>
+                </button>
             </div>
         </div>
     </div>

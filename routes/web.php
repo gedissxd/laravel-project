@@ -3,12 +3,16 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\SessionController;
 
 Route::view('/', 'home');
 Route::resource('products', ProductController::class);
 Route::view('/cart', 'cart');
-Route::view('register' ,'register');
-Route::view('/login', 'login');
+Route::get('register' ,[RegisteredUserController::class, 'create']);
+Route::post('register' ,[RegisteredUserController::class, 'store']);
+Route::get('/login', [SessionController::class, 'create']);
+Route::post('/login', [SessionController::class, 'store']);
 
 
 // //all products

@@ -24,7 +24,7 @@
             </div>
             <x-errors name="price"/>
             <div>
-                <x-button type="submit" class="px-4 py-2">Add Product </x-button>
+                <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-xs text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 ">Add Product </button>
             </div>
         </form>
     </div>

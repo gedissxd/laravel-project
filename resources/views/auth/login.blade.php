@@ -13,7 +13,7 @@
                 <x-input type="text" id="product_name" name="product_name" required/>
             </div>
             <x-errors name="product_name"/>
-            <x-button type="submit" class="py-2 px-4">Login</x-button>
+            <button type="submit" class="w-full flex justify-center py-2 px-4 rounded-md shadow-xs text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 ">Login</button>
         </form>
     </div>
 </x-layout>
