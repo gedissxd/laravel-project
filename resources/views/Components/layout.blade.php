@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-gray-600 flex flex-col">
+<html lang="en" class="bg-gray-500 flex flex-col">
 
 <head>
     <meta charset="UTF-8">

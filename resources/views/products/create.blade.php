@@ -10,7 +10,7 @@
             <x-errors name="product_name"/>
             <div>
                 <x-label for="description">Description</x-label>
-                <x-textarea id="description" name="description" rows="3" required></x-textarea>
+                <textarea class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-xs" id="description" name="description" rows="3" required></textarea>
             </div>
             <x-errors name="description"/>
             <div>
