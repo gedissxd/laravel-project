@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Password;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+
+
 class RegisteredUserController extends Controller
 {
     public function create()
@@ -16,12 +18,11 @@ class RegisteredUserController extends Controller
     {
         $validated = request()->validate([
             'name' => ['required'],
-            'email' => ['required','email','confirmed'],
-            'password' => ['required',Password::min(8)],
+            'email' => ['required', 'email', 'confirmed'],
+            'password' => ['required'],
         ]);
         $user = User::create($validated);
         Auth::login($user);
         return redirect('/products');
     }
-
 }

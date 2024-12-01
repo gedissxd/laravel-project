@@ -1,7 +1,7 @@
 <x-layout>
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md mt-20">
         <h1 class="text-2xl font-bold mb-6 text-center text-gray-800">Register</h1>
-        <form class="space-y-4" method="POST" action="/products">
+        <form class="space-y-4" method="POST" action="/register">
             @csrf
             <div>
                 <x-label for="name">Username</x-label>

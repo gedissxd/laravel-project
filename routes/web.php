@@ -9,10 +9,11 @@ use App\Http\Controllers\SessionController;
 Route::view('/', 'home');
 Route::resource('products', ProductController::class);
 Route::view('/cart', 'cart');
-Route::get('register' ,[RegisteredUserController::class, 'create']);
-Route::post('register' ,[RegisteredUserController::class, 'store']);
+Route::get('/register', [RegisteredUserController::class, 'create']);
+Route::post('/register', [RegisteredUserController::class, 'store']);
 Route::get('/login', [SessionController::class, 'create']);
 Route::post('/login', [SessionController::class, 'store']);
+Route::post('/logout', [SessionController::class, 'destroy']);
 
 
 // //all products
