@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Password;
 
 class RegisteredUserController extends Controller
 {
@@ -12,6 +13,10 @@ class RegisteredUserController extends Controller
     }
     public function store()
     {
-        dd('todo');
+        request()->validate([
+            'name' => ['required'],
+            'email' => ['required','email','confirmed'],
+            'password' => ['required',Password::min(8)],
+        ]);
     }
 }
