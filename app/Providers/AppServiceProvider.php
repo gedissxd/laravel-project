@@ -22,9 +22,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define('edit-product', function (User $user , Product $product){
-        return ($product->maker->user->is($user));
-        });
+        // Gate::define('edit-product', function (User $user , Product $product){
+        // return ($product->maker->user->is($user));
+        // });
 
     }
 }

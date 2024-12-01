@@ -15,8 +15,10 @@
                 <x-button class="mt-4 w-[100px] py-4" href="/cart">Add to cart</x-button>
             </div>
         </div>
-
-        <x-button class="mt-4 w-[100px] py-2" href="/products/{{ $product['id'] }}/edit">Edit Product</x-button>
+        
+        @can('edit', $product)
+            <x-button class="mt-4 w-[100px] py-2" href="/products/{{ $product['id'] }}/edit">Edit Product</x-button>
+        @endcan
         <div class="mt-24">
             <h3 class="text-3xl font-bold text-gray-900 mb-8">Related Products</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">

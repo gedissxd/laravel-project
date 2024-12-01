@@ -44,9 +44,6 @@ class ProductController extends Controller
     }
     public function edit(Product $product)
     {
-        Gate::allows('edit-product', $product);
-
-
         return view('products.edit', ['product' => $product]);
     }
     public function update(Product $product)

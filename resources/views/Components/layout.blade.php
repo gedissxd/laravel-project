@@ -13,7 +13,7 @@
 
     <div class="sticky top-0 z-50">
         <nav
-            class="font-bold text-white bg-sky-500/90 w-full h-[50px] border-b shadow-md shadow-white/50 backdrop-blur-sm">
+            class="font-bold text-white bg-sky-500/90 w-full h-[50px] border-b shadow-md  backdrop-blur-sm">
             <div class="mx-auto flex items-center justify-between h-full px-4">
 
                 <div class="flex space-x-3">
@@ -42,7 +42,7 @@
         {{ $slot }}
     </div>
 
-    <footer class="bg-sky-500/90 h-20 flex justify-center items-center mt-auto ">
+    <footer class="bg-sky-500/90 h-20 flex justify-center items-center mt-auto shadoow-md border-t">
     </footer>
 </body>
 
