@@ -12,12 +12,12 @@ class CartItemController extends Controller
 {
     public function index()
     {
-       
+        return view('cart');
     }
 
     public function store(Product $product)
     {
-     
+        return view('cart');
     }
 
     public function destroy(CartItem $cartItem)
