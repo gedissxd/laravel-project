@@ -15,7 +15,12 @@
                 
                 <p class="text-sm text-gray-700 font-medium">Made by {{ $product->maker->name }}</p>
                 <p class="text-3xl font-bold text-gray-900">${{ number_format($product['price'], 2) }}</p>
-                <x-button class="mt-4 w-[100px] py-4" href="/cart">Add to cart</x-button>
+                <form action="/cart" method="get">
+                    @csrf
+                    <button type="submit" class="mt-4 w-[100px] py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-md">
+                        Add to cart
+                    </button>
+                </form>
             </div>
         </div>
         @can('edit', $product)

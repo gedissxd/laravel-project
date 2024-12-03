@@ -35,7 +35,7 @@ class ProductController extends Controller
         'description' => 'required',
         'price' => 'required|numeric|min:0',
         'image' => 'required',
-        'tags' => ['nullable'],
+        'tags' => ['nullable', ],
     ]);
 
     // Get the authenticated user
@@ -53,7 +53,7 @@ class ProductController extends Controller
     // Handle tags if provided
     if ($attributes['tags'] ?? false) {
         foreach (explode(",", $attributes['tags']) as $tag) {
-            $product->tag(trim($tag)); // Trim to remove any extra spaces
+            $product->tag($tag); 
         }
     }
 

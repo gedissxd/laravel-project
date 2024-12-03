@@ -5,14 +5,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\CartItemController;
 
 Route::view('/', 'home');
+
 Route::view('/cart', 'cart');
 
-Route::get('/products', [ProductController::class, 'index']);
-
-Route::get('/products/create', [ProductController::class, 'create'])
+Route::post('/cart', [CartItemController::class, 'store'])
 ->middleware(['auth']);
+
+
+Route::get('/products', [ProductController::class, 'index']);
 
 Route::get('/products/{product}', [ProductController::class, 'show']);
 
