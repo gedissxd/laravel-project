@@ -1,4 +1,4 @@
-@auth
+
 <x-layout>
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md mt-20">
         <h1 class="text-2xl font-bold mb-6 text-center text-gray-800">Add New Product</h1>
@@ -34,4 +34,3 @@
         </form>
     </div>
 </x-layout>
-@endauth

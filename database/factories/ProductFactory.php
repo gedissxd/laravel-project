@@ -29,7 +29,7 @@ class ProductFactory extends Factory
             'maker_id' => Maker::factory(),
             'product_name' => fake()->word(),
             'description' => fake()->paragraph(),
-            'price' => fake()->randomFloat(2, 10, 1000),
+            'price' => fake()->numberBetween(1,100),
             'image' => 'https://placehold.co/' . fake()->numberBetween(640, 1024) . 'x' . fake()->numberBetween(480, 768) . '/' . fake()->randomElement($colors),
         ];
     }

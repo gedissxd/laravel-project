@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class ProductController extends Controller
 {
@@ -18,30 +21,33 @@ class ProductController extends Controller
     {
         return view('products.create');
     }
-    public function show(Product $product)
+    public function show(Product $product )
     {
-        return view('products.show', ['product' => $product]);
+        $tags = $product->tags; 
+        return view('products.show', compact('product', 'tags'));
     }
-    public function store()
+    
+    public function store(Request $request)
     {
-        request()->validate([
+        $attributtes=$request->validate([
             'product_name' => 'required',
             'description' => 'required',
             'price' => 'required|numeric|min:0',
             'image' => 'required',
+            'tags' => ['nullable'],
         ]);
 
-        Product::create([
-            'product_name' => request('product_name'),
-            'description' => request('description'),
-            'price' => request('price'),
-            'maker_id' => 1,
-            'image' => request('image'),
-            
-        ]);
-        Tag::create([
-            'name' => request('tags'),
-        ]);
+        $product = Auth::user()->maker->products()->create(Arr::except($attributtes , 'tags'));
+
+        if($attributtes['tags'] ?? false)
+        {
+            foreach(explode("," ,$attributtes['tags']) as $tag)
+            {
+                $product->tag($tag);
+            }
+        
+        }
+
         return redirect('/products');
     }
     public function edit(Product $product)

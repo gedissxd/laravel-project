@@ -23,4 +23,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function maker()
+    {
+        return $this->hasOne(Maker::class);
+    }
 }

@@ -17,11 +17,17 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
-        $tags = Tag::factory(3)->create();
-        Product::factory(50)->hasAttached($tags)->create();
+        if (!User::where('email', 'test@example.com')->exists()) {
+            User::factory()->create([
+                'name' => 'Test User',
+                'email' => 'test@example.com',
+            ]);
+        }
+
+        $tags = Tag::factory(60)->create();
+
+        foreach (Product::factory(1000)->create() as $product) {
+            $product->tags()->attach($tags->random(rand(1, 3)));
+        }
     }
 }
