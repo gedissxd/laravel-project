@@ -10,6 +10,7 @@ class Tag extends Model
     /** @use HasFactory<\Database\Factories\TagFactory> */
     use HasFactory;
     protected $table = 'tags';
+    protected $guarded =[];
     public function products()
     {
         return $this->belongsToMany(Product::class, relatedPivotKey: 'product_listing_id');
