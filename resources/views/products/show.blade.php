@@ -9,8 +9,8 @@
             <div class="w-[600px] space-y-6">
                 <h2 class="text-4xl font-bold text-gray-900">{{ $product['product_name'] }}</h2>
                 <p class="text-gray-900 text-lg ">{{ $product['description'] }}</p>
-
-                <p class="text-sm text-gray-500 font-medium">Made by {{ $product->maker->name }}</p>
+                
+                <p class="text-sm text-gray-700 font-medium">Made by {{ $product->maker->name }}</p>
                 <p class="text-3xl font-bold text-gray-900">${{ number_format($product['price'], 2) }}</p>
                 <x-button class="mt-4 w-[100px] py-4" href="/cart">Add to cart</x-button>
             </div>

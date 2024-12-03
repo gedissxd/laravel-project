@@ -8,9 +8,9 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::with('maker')->paginate(28);
+        $products = Product::with(['maker', 'tags'])->paginate(28);
         return view('products.index', [
-            'products' => Product::all(),
+            'products' => $products,
             'tags' => Tag::all(),
         ]);
     }
