@@ -37,6 +37,10 @@ class ProductController extends Controller
             'price' => request('price'),
             'maker_id' => 1,
             'image' => request('image'),
+            
+        ]);
+        Tag::create([
+            'name' => request('tags'),
         ]);
         return redirect('/products');
     }
@@ -51,7 +55,7 @@ class ProductController extends Controller
             'product_name' => 'required',
             'description' => 'required',
             'price' => 'required|numeric|min:0',
-            'image' => 'required',
+            'image' => 'required'
         ]);
 
         $product->update([
