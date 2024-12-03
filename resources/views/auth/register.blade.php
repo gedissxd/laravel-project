@@ -23,6 +23,11 @@
                 <x-input type="email" id="email_confirmation" name="email_confirmation" required/>
             </div>
             <x-errors name="email"/>
+            <div>
+                <x-label for="maker_name">Company Name</x-label>
+                <x-input type="text" id="maker_name" name="maker_name" required/>
+            </div>
+            <x-errors name="maker_name"/>
             <button type="submit" class="w-full flex justify-center py-2 px-4  rounded-md shadow-xs text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 ">Register User</button>
         </form>
     </div>

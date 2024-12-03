@@ -10,6 +10,7 @@ class Maker extends Model
 {
     /** @use HasFactory<\Database\Factories\MakerFactory> */
     use HasFactory;
+    protected $guarded = [];
     public function products()
     {
         return $this->hasMany(Product::class);

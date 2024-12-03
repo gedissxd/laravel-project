@@ -6,6 +6,7 @@ use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use App\Models\Maker;
 
 class ProductController extends Controller
 {
@@ -28,28 +29,36 @@ class ProductController extends Controller
     }
     
     public function store(Request $request)
-    {
-        $attributtes=$request->validate([
-            'product_name' => 'required',
-            'description' => 'required',
-            'price' => 'required|numeric|min:0',
-            'image' => 'required',
-            'tags' => ['nullable'],
-        ]);
+{
+    $attributes = $request->validate([
+        'product_name' => 'required',
+        'description' => 'required',
+        'price' => 'required|numeric|min:0',
+        'image' => 'required',
+        'tags' => ['nullable'],
+    ]);
 
-        $product = Auth::user()->maker->products()->create(Arr::except($attributtes , 'tags'));
+    // Get the authenticated user
+    $user = Auth::user();
 
-        if($attributtes['tags'] ?? false)
-        {
-            foreach(explode("," ,$attributtes['tags']) as $tag)
-            {
-                $product->tag($tag);
-            }
-        
+    // Check if the user has a maker, if not create one
+    $maker = $user->maker ?? Maker::create([
+        'user_id' => $user->id,
+        'name' => $user->maker_name,
+    ]);
+
+    // Create the product
+    $product = $maker->products()->create(Arr::except($attributes, 'tags'));
+
+    // Handle tags if provided
+    if ($attributes['tags'] ?? false) {
+        foreach (explode(",", $attributes['tags']) as $tag) {
+            $product->tag(trim($tag)); // Trim to remove any extra spaces
         }
-
-        return redirect('/products');
     }
+
+    return redirect('/products');
+}
     public function edit(Product $product)
     {
         return view('products.edit', ['product' => $product]);

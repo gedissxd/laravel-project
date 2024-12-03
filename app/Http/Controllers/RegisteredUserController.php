@@ -20,6 +20,7 @@ class RegisteredUserController extends Controller
             'name' => ['required'],
             'email' => ['required', 'email', 'confirmed'],
             'password' => ['required'],
+            'maker_name' => ['required']
         ]);
         $user = User::create($validated);
         Auth::login($user);
