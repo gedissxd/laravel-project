@@ -95,6 +95,13 @@ class ProductController extends Controller
             'price' => request('price'),
             'image' => request('image'),
         ]);
+
+        if (!empty(request('tags'))) {
+            $tags = explode(',', request('tags'));
+            foreach ($tags as $tag) {
+                $product->tag(trim($tag));
+            }
+        }
         return redirect('/products/' . $product->id);
     }
     public function destroy(Product $product)
