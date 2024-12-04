@@ -31,6 +31,7 @@ class SessionController extends Controller
     }
     public function destroy()
     {
+        session()->flush();
         Auth::logout();
 
         return redirect('/');

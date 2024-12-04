@@ -2,28 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CartItem;
+
 use App\Models\Product;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+
 
 
 class CartItemController extends Controller
 {
     public function index()
     {
-    
-
-        return view('cart.index');
+        // Get the cart items from the session
+        $carts = session()->get('carts',[]);
+        
+        return view('cart.index', [
+            'carts' => $carts
+        ]);
     }
 
     public function store(Product $products)
     {
-        $productId = request()->input('product_id');
-        $products = Product::find($productId);
+        // Get the product id from the request
+        $product_id = request()->input('product_id');
+        // Find the product
+        $products = Product::find($product_id);
         // Add product to cart
         $carts = session()->get('carts', []);
-        $carts[$productId] = [
+        $carts[$product_id] = [
             'name' => $products->product_name,
             'price' => $products->price,
             'image' => $products->image,
@@ -37,8 +41,4 @@ class CartItemController extends Controller
     
     }
 
-    public function updateQuantity(CartItem $cartItem, Request $request)
-    {
-     
-    }
 }

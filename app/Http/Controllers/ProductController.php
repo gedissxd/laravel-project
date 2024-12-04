@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use App\Models\Maker;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class ProductController extends Controller
 {
@@ -22,10 +23,25 @@ class ProductController extends Controller
     {
         return view('products.create');
     }
-    public function show(Product $product )
+    public function show(Product $product)
     {
-        $tags = $product->tags; 
-        return view('products.show', compact('product', 'tags'));
+
+        $product->load(['maker', 'tags']);
+
+        $relatedProducts = Product::query()
+            ->with(['maker', 'tags'])
+            ->whereHas('tags', function ($query) use ($product) {
+                $query->whereIn('name', $product->tags->pluck('name'));
+            })
+            ->where('id', '!=', $product->id)
+            ->take(5)
+            ->get();
+
+        return view('products.show', [
+            'product' => $product,
+            'relatedProducts' => $relatedProducts,
+            'tags' => $product->tags
+        ]);
     }
     
     public function store(Request $request)
@@ -42,13 +58,13 @@ class ProductController extends Controller
     $user = Auth::user();
 
     // Check if the user has a maker, if not create one
-    $maker = $user->maker ?? Maker::create([
+    $user->maker ?? Maker::create([
         'user_id' => $user->id,
         'name' => $user->maker_name,
     ]);
 
     // Create the product
-    $product = $maker->products()->create(Arr::except($validated, 'tags'));
+    $product = $user->maker->products()->create(Arr::except($validated, 'tags'));
 
     // Handle tags if provided
     if ($validated['tags'] ?? false) {
