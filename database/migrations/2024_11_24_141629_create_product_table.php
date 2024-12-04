@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Maker;
 
 return new class extends Migration
 {
@@ -13,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('product_listings', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Maker::class);
+            $table->foreignIdFor(Maker::class);
             $table->string('product_name');
             $table->string('image');
             $table->text('description')->nullable();
