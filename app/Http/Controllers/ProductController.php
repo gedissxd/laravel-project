@@ -29,8 +29,8 @@ class ProductController extends Controller
     }
     
     public function store(Request $request)
-{
-    $attributes = $request->validate([
+    {
+    $validated = $request->validate([
         'product_name' => 'required',
         'description' => 'required',
         'price' => 'required|numeric|min:0',
@@ -48,17 +48,17 @@ class ProductController extends Controller
     ]);
 
     // Create the product
-    $product = $maker->products()->create(Arr::except($attributes, 'tags'));
+    $product = $maker->products()->create(Arr::except($validated, 'tags'));
 
     // Handle tags if provided
-    if ($attributes['tags'] ?? false) {
-        foreach (explode(",", $attributes['tags']) as $tag) {
+    if ($validated['tags'] ?? false) {
+        foreach (explode(",", $validated['tags']) as $tag) {
             $product->tag($tag); 
         }
     }
 
     return redirect('/products');
-}
+    }
     public function edit(Product $product)
     {
         return view('products.edit', ['product' => $product]);
