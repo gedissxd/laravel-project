@@ -9,9 +9,10 @@ use App\Http\Controllers\CartItemController;
 
 Route::view('/', 'home');
 Route::get('/counter', Counter::class);
+
+
 // cart
 Route::get('/cart', [CartItemController::class, 'index']);
-
 Route::post('/cart', [CartItemController::class, 'store']);
 
 // products

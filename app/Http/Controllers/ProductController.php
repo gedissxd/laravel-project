@@ -31,11 +31,11 @@ class ProductController extends Controller
     public function store(Request $request)
     {
     $validated = $request->validate([
-        'product_name' => 'required',
-        'description' => 'required',
-        'price' => 'required|numeric|min:0',
-        'image' => 'required',
-        'tags' => ['nullable', ],
+        'product_name' => ['required'],
+        'description' => ['required'],
+        'price' => ['required', 'numeric', 'min:0'],
+        'image' => ['required'],
+        'tags' => ['nullable'],
     ]);
 
     // Get the authenticated user
