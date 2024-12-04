@@ -30,11 +30,7 @@
             </div>
             <x-errors name="price" />
             <div>
-<<<<<<< HEAD
                 <x-label for="tags">Tags (comma separated)</x-label>
-=======
-                <x-label for="tags">Tags</x-label>
->>>>>>> 8105a7da0b6f6ac341d63db40222929073e66e96
                 <x-input type="text" id="tags" name="tags" required value="{{ $product->tags->pluck('name')->implode(',') }}" />
             </div>
             <x-errors name="tags" />
