@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\Maker::class);
             $table->string('product_name');
             $table->string('image');
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->float('price');
             $table->timestamps();
         });
