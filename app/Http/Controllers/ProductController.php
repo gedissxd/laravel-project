@@ -13,7 +13,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::with(['maker', 'tags'])->paginate(28);
+        $products = Product::with(['maker', 'tags'])->latest()->paginate(28);
         return view('products.index', [
             'products' => $products,
             'tags' => Tag::all(),
@@ -27,9 +27,7 @@ class ProductController extends Controller
     {
 
         $product->load(['maker', 'tags']);
-
-        $relatedProducts = Product::query()
-            ->with(['maker', 'tags'])
+        $relatedProducts = Product::with(['maker', 'tags'])
             ->whereHas('tags', function ($query) use ($product) {
                 $query->whereIn('name', $product->tags->pluck('name'));
             })
@@ -54,19 +52,10 @@ class ProductController extends Controller
         'tags' => ['nullable'],
     ]);
 
-    // Get the authenticated user
     $user = Auth::user();
 
-    // Check if the user has a maker, if not create one
-    $user->maker ?? Maker::create([
-        'user_id' => $user->id,
-        'name' => $user->maker_name,
-    ]);
-
-    // Create the product
     $product = $user->maker->products()->create(Arr::except($validated, 'tags'));
 
-    // Handle tags if provided
     if ($validated['tags'] ?? false) {
         foreach (explode(",", $validated['tags']) as $tag) {
             $product->tag($tag); 
@@ -86,7 +75,8 @@ class ProductController extends Controller
             'product_name' => 'required',
             'description' => 'required',
             'price' => 'required|numeric|min:0',
-            'image' => 'required'
+            'image' => 'required',
+            'tags' => 'required',
         ]);
 
         $product->update([
@@ -95,6 +85,11 @@ class ProductController extends Controller
             'price' => request('price'),
             'image' => request('image'),
         ]);
+        $product->tags()->detach();
+        foreach(explode(',', request('tags')) as $tag){
+            $product->tag($tag);
+        }
+
         return redirect('/products/' . $product->id);
     }
     public function destroy(Product $product)

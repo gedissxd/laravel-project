@@ -23,6 +23,11 @@ class RegisteredUserController extends Controller
             'maker_name' => ['required']
         ]);
         $user = User::create($validated);
+
+        $user->maker()->create([
+            'name' => $validated['maker_name']
+        ]);
+
         Auth::login($user);
         return redirect('/products');
     }

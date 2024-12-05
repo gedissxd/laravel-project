@@ -1,7 +1,7 @@
 @props(['product', 'tags'])
 
 <a href="/products/{{ $product['id'] }}">
-    <div class="bg-white rounded-lg">
+    <div class="bg-white rounded-lg h-full">
         <img src="{{ $product['image'] }}" alt="{{ $product['product_name'] }}"
             class="w-full h-48 object-cover rounded-t-lg">
         <div class="p-4">
