@@ -82,17 +82,13 @@ class ProductController extends Controller
             'description' => request('description'),
             'price' => request('price'),
             'image' => request('image'),
-            'tags' => request('tags'),
+
         ]);
-
-
-
-        if (!empty(request('tags'))) {
-            $tags = explode(',', request('tags'));
-            foreach ($tags as $tag) {
-                $product->tag(trim($tag));
-            }
+        $product->tags()->detach();
+        foreach(explode(',', request('tags')) as $tag){
+            $product->tag($tag);
         }
+
 
         return redirect('/products/' . $product->id);
     }
