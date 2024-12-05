@@ -14,8 +14,8 @@ return new class extends Migration
     {
         Schema::create('makers', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class);
             $table->string('name');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

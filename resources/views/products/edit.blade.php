@@ -35,6 +35,11 @@
             </div>
             <x-errors name="tags" />
             <div>
+                <x-label for="tags">Tags (comma separated)</x-label>
+                <x-input type="text" id="tags" name="tags" required value="{{ $product->tags->pluck('name')->implode(',') }}" />
+            </div>
+            <x-errors name="tags" />
+            <div>
                 <x-button class="py-2 px-4 mb-4" href="/products/{{ $product->id }}">
                     Cancel
                 </x-button>

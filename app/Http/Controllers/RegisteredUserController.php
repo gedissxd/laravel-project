@@ -14,21 +14,24 @@ class RegisteredUserController extends Controller
     {
         return view('auth.register');
     }
-    public function store()
+    public function store(Request $request)
     {
-        $validated = request()->validate([
+        $userAttributes = $request->validate([
             'name' => ['required'],
             'email' => ['required', 'email', 'confirmed', 'unique:users,email'],
-            'password' => ['required'],
+            'password' => ['required' , Password::min(6)],
             'maker_name' => ['required']
         ]);
-        $user = User::create($validated);
-
-        $user->maker()->create([
-            'name' => $validated['maker_name']
+        $makerAttributes = $request->validate([
+            'maker_name' => ['required'],
         ]);
 
+        $user = User::create($userAttributes);
+
+        $user->maker()->create($makerAttributes);
+
         Auth::login($user);
+
         return redirect('/products');
     }
 }

@@ -31,7 +31,7 @@ class ProductController extends Controller
             ->whereHas('tags', function ($query) use ($product) {
                 $query->whereIn('name', $product->tags->pluck('name'));
             })
-            ->where('id', '!=', $product->id)
+            ->where('id', '=', $product->id)
             ->take(5)
             ->get();
 
@@ -54,19 +54,17 @@ class ProductController extends Controller
 
     $user = Auth::user();
 
-    $product = $user->maker->products()->create(Arr::except($validated, 'tags'));
-
-    if ($validated['tags'] ?? false) {
-        foreach (explode(",", $validated['tags']) as $tag) {
-            $product->tag($tag); 
-        }
+    // Create the product
+    $product = $user->maker->products()->create(Arr::except($validated, 'tags'));     
+    foreach (explode(",", $validated['tags']) as $tag) {
+       $product->tag($tag); 
     }
-
+    
     return redirect('/products');
     }
     public function edit(Product $product)
     {
-        return view('products.edit', ['product' => $product]);
+        return view('products.edit', ['product' => $product,]);
     }
     public function update(Product $product)
     {
@@ -84,10 +82,16 @@ class ProductController extends Controller
             'description' => request('description'),
             'price' => request('price'),
             'image' => request('image'),
+            'tags' => request('tags'),
         ]);
-        $product->tags()->detach();
-        foreach(explode(',', request('tags')) as $tag){
-            $product->tag($tag);
+
+
+
+        if (!empty(request('tags'))) {
+            $tags = explode(',', request('tags'));
+            foreach ($tags as $tag) {
+                $product->tag(trim($tag));
+            }
         }
 
         return redirect('/products/' . $product->id);
