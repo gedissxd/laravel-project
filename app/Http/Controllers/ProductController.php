@@ -25,13 +25,12 @@ class ProductController extends Controller
     }
     public function show(Product $product)
     {
-
         $product->load(['maker', 'tags']);
         $relatedProducts = Product::with(['maker', 'tags'])
             ->whereHas('tags', function ($query) use ($product) {
                 $query->whereIn('name', $product->tags->pluck('name'));
             })
-            ->where('id', '=', $product->id)
+            ->where('id', '!=', $product->id)
             ->take(5)
             ->get();
 

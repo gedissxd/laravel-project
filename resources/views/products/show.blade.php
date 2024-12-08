@@ -1,4 +1,3 @@
-
 <x-layout>
     <div class="mx-auto px-4 py-12 max-w-[1300px]">
 
@@ -32,7 +31,7 @@
             <h3 class="text-3xl font-bold text-gray-900 mb-8">Related Products</h3>
             <div class="grid grid-cols-5 gap-8">
                     @foreach($relatedProducts as $relatedProduct)
-                        <x-related-product-block :product="$relatedProduct"/>
+                        <x-related-product-block :relatedProducts="$relatedProduct"/>
                     @endforeach
 
             </div>

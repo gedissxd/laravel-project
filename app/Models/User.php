@@ -29,4 +29,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Maker::class);
     }
+    
+    public function product()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
